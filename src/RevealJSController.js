@@ -15,6 +15,9 @@ var RevealJSController = /** @class */ (function () {
         if (params.mode === 'master') {
             this.isMaster = true;
         }
+        else {
+            Reveal.configure({ controls: false });
+        }
         this.peer = new skyway_js_1.default({
             key: skywayKey,
             debug: 2
@@ -22,7 +25,12 @@ var RevealJSController = /** @class */ (function () {
         this.peer.on('open', function (peerId) {
             console.log("my peer id : " + peerId);
             if (!_this.isMaster) {
-                _this.dataConnection = _this.peer.connect(params.peerId);
+                _this.dataConnection = _this.peer.connect(params.peerId, {
+                    dcInit: {
+                        ordered: false
+                    }
+                });
+                console.log(_this.dataConnection.dcInit);
                 _this.dataConnection.on('data', function (data) {
                     Reveal.slide(data.indexh, data.indexv);
                 });
@@ -33,6 +41,7 @@ var RevealJSController = /** @class */ (function () {
             }
         });
         this.peer.on('connection', function (dc) {
+            console.log(dc.dcInit);
             _this.dataConnection = dc;
         });
         Reveal.addEventListener("slidechanged", function (event) {

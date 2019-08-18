@@ -20129,6 +20129,10 @@ function () {
 
     if (params.mode === 'master') {
       this.isMaster = true;
+    } else {
+      Reveal.configure({
+        controls: false
+      });
     }
 
     this.peer = new skyway_js_1["default"]({
@@ -20139,7 +20143,12 @@ function () {
       console.log("my peer id : " + peerId);
 
       if (!_this.isMaster) {
-        _this.dataConnection = _this.peer.connect(params.peerId);
+        _this.dataConnection = _this.peer.connect(params.peerId, {
+          dcInit: {
+            ordered: false
+          }
+        });
+        console.log(_this.dataConnection.dcInit);
 
         _this.dataConnection.on('data', function (data) {
           Reveal.slide(data.indexh, data.indexv);
@@ -20150,6 +20159,7 @@ function () {
       }
     });
     this.peer.on('connection', function (dc) {
+      console.log(dc.dcInit);
       _this.dataConnection = dc;
     });
     Reveal.addEventListener("slidechanged", function (event) {

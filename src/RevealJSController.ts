@@ -16,6 +16,8 @@ class RevealJSController {
         }
         if (params.mode === 'master') {
             this.isMaster = true;
+        } else {
+            Reveal.configure({ controls: false });
         }
 
         this.peer = new Peer({
