@@ -1,0 +1,34 @@
+{
+  "name": "revealjs-controller",
+  "version": "1.0.0",
+  "description": "reveal.jsを遠隔操作するプログラム",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc && browserify --transform babelify --outfile dist/RevealJSController.js src/RevealJSController.js",
+    "watch": "tsc -w src/",
+    "babel": "./node_modules/.bin/babel ./src/RevealJSController.js --out-dir dist/",
+    "browserify": "browserify --transform babelify --outfile dist/index.js src/RevealJSController.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kadoshita/revealjs-controller.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kadoshita/revealjs-controller/issues"
+  },
+  "homepage": "https://github.com/kadoshita/revealjs-controller#readme",
+  "dependencies": {
+    "@types/node": "^12.7.1",
+    "@types/reveal": "^3.3.33",
+    "skyway-js": "^2.0.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babelify": "^10.0.0",
+    "browserify": "^16.5.0"
+  }
+}
