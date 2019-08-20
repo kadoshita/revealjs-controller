@@ -37,7 +37,7 @@ var RevealJSController = /** @class */ (function () {
             }
             else {
                 var viewerLink = document.getElementById('viewer-link');
-                viewerLink.href = location.protocol + "//" + location.host + "?peerId=" + peerId;
+                viewerLink.href = location.href.split('?')[0] + "?peerId=" + peerId;
             }
         });
         this.peer.on('connection', function (dc) {
